@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件流</title>
+    <style>
+        #div1{
+            background: red;
+            padding: 50px;
+        }
+        #div2{
+            background: pink;
+            padding: 50px;
+        }
+        #div3{
+            background: blue;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <div id="div2">
+            <div id="div3"></div>
+        </div>
+    </div>
+</body>
+<script>
+     //数据类型： 
+    //基本数据类型 （原始类型） :在栈内存值
+    //引用数据类型:在栈内存址，堆内存值
+
+    //事件流：页面接收事件的顺序
+    //事件冒泡：事件从最具体的元素传递到最不具体元素 (IE)
+    //事件捕获：事件从最不具体的元素传递到最具体元素 (网景)
+    var div1 = document.getElementById('div1');
+    var div2 = document.getElementById('div2');
+    var div3 = document.getElementById('div3');
+    
+    //事件监听器
+    //1.可以为同一个事件类型绑定多个处理函数
+    //2.选择事件流
+    /* div1.addEventListener('click',function(){
+        alert('div1');
+    },false)
+
+    div2.addEventListener('click',function(e){
+        e.stopPropagation(); //e.cancelBubble = true;
+        alert('div2');
+    },false)
+
+    div3.addEventListener('click',function(e){
+        //e.stopPropagation();
+        alert('div3');
+    },false) */
+
+   
+    /* function fn(){
+        alert('div1-1');
+        div1.removeEventListener('click',fn,false)
+    }
+    div1.addEventListener('click',fn,false) */
+    //兼容低版本IE
+    function callback(){
+        alert(1);
+    }
+    div1.attachEvent('onclick',callback)  //添加
+    div1.detachEvent('onclick',callback)  //移除
+
+    /* div1.addEventListener?div1.addEventListener('click',fn,false):div1.attachEvent('onclick',function(){
+        alert(1);
+    }) */
+
+    
+
+
+    </script>
+</html>
